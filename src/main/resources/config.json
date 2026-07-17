@@ -1,0 +1,9 @@
+{
+  "seedChannels": [
+    { "name": "timonsoe", "twitchId": "979208703" }
+  ],
+  "channelSyncIntervalSeconds": 60,
+  "messageBatchSize": 100,
+  "messageFlushIntervalMs": 1000,
+  "userFlushIntervalSeconds": 5
+}
