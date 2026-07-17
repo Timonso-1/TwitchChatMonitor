@@ -14,7 +14,7 @@ object DatabaseFactory {
     fun init(cfg: DbConfig) {
         val dataSource = HikariDataSource(HikariConfig().apply {
             jdbcUrl = "jdbc:mysql://${cfg.host}:${cfg.port}/${cfg.database}" +
-                    "?useUnicode=true&characterEncoding=UTF-8&connectionTimeZone=UTC"
+                    "?useUnicode=true&characterEncoding=UTF-8&connectionTimeZone=Europe/Berlin"
             username = cfg.user
             password = cfg.password
             driverClassName = "com.mysql.cj.jdbc.Driver"
