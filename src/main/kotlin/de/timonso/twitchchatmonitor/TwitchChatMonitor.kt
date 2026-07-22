@@ -43,8 +43,11 @@ fun main() {
     val sync = ChannelSync(client.chat, settings.channelSyncIntervalSeconds)
     sync.start()
 
+    Heartbeat.start()
+
     Runtime.getRuntime().addShutdownHook(Thread {
         log.info("Fahre herunter...")
+        Heartbeat.stop()
         sync.stop()
         client.close()
         messageTracker.stop()
