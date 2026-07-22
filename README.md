@@ -1,5 +1,7 @@
 # TwitchChatMonitor
 
+![Deploy](https://github.com/Timonso-1/TwitchChatMonitor/actions/workflows/deploy.yml/badge.svg)
+
 Bot, der Twitch-Chats mitliest und Nachrichten, Moderationsaktionen und Events in einer MySQL-Datenbank speichert.
 Channels werden über die Datenbank verwaltet (vorbereitet für ein späteres Web-Panel).
 
