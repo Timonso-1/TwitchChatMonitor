@@ -1,0 +1,44 @@
+name: Deploy TwitchChatMonitor
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
+
+  - name: JDK 25 einrichten
+    uses: actions/setup-java@v4
+    with:
+      distribution: temurin
+      java-version: '25'
+
+  - name: Gradle Build
+    run: |
+      chmod +x ./gradlew
+      ./gradlew build
+
+  - name: JAR finden und umbenennen
+    run: |
+      JAR=$(find build/libs -name "*.jar" ! -name "*-plain.jar" | head -n1)
+      echo "Gefundene JAR: $JAR"
+      cp "$JAR" TwitchChatMonitor.jar
+
+  - name: Upload per SFTP
+    run: |
+      sudo apt-get update && sudo apt-get install -y lftp
+      lftp -u "${{ secrets.SFTP_USER }},${{ secrets.SFTP_PASSWORD }}" \
+           -e "set sftp:auto-confirm yes; put TwitchChatMonitor.jar -o /TwitchChatMonitor.jar; bye" \
+           sftp://${{ secrets.SFTP_HOST }}:2022
+
+  - name: Server neustarten
+    run: |
+      curl -s -X POST "https://panel.timonso.de/api/client/servers/${{ secrets.PELICAN_SERVER_ID }}/power" \
+        -H "Authorization: Bearer ${{ secrets.PELICAN_API_KEY }}" \
+        -H "Content-Type: application/json" \
+        -H "Accept: application/json" \
+        -d '{"signal": "restart"}'

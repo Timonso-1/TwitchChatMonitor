@@ -10,7 +10,7 @@ import kotlin.concurrent.thread
 
 object Heartbeat {
     private val log = LoggerFactory.getLogger("Heartbeat")
-    private const val PUSH_URL = "Push: https://status.timonso.de/api/push/YhEp1opik4?status=up&msg=OK&ping="
+    private const val PUSH_URL = "https://status.timonso.de/api/push/YhEp1opik4?status=up&msg=OK"
     private const val INTERVAL_MS = 30_000L
 
     @Volatile private var running = false
