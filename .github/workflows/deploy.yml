@@ -34,9 +34,9 @@ jobs:
       - name: Upload per SFTP
         run: |
           sudo apt-get update && sudo apt-get install -y lftp
-          lftp -u "${{ secrets.SFTP_USER }},${{ secrets.SFTP_PASSWORD }}" \
-               -e "set sftp:auto-confirm yes; put TwitchChatMonitor.jar -o /TwitchChatMonitor.jar; bye" \
-               sftp://${{ secrets.SFTP_HOST }}:2022
+          timeout 120 lftp -u "${{ secrets.SFTP_USER }},${{ secrets.SFTP_PASSWORD }}" \
+            -e "set sftp:auto-confirm yes; set net:timeout 20; set net:max-retries 2; set cmd:fail-exit yes; debug 3; put TwitchChatMonitor.jar -o /TwitchChatMonitor.jar; bye" \
+            sftp://${{ secrets.SFTP_HOST }}:2022
 
       - name: Server neustarten
         run: |
