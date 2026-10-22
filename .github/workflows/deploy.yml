@@ -40,7 +40,7 @@ jobs:
 
       - name: Server neustarten
         run: |
-          curl -s -X POST "https://panel.timonso.de/api/client/servers/${{ secrets.PELICAN_SERVER_ID }}/power" \
+          curl -sf -X POST "https://panel.timonso.de/api/client/servers/${{ secrets.PELICAN_SERVER_ID }}/power" \
             -H "Authorization: Bearer ${{ secrets.PELICAN_API_KEY }}" \
             -H "Content-Type: application/json" \
             -H "Accept: application/json" \
