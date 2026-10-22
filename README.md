@@ -1,4 +1,5 @@
 # TwitchChatMonitor
+[![Deploy TwitchChatMonitor](https://github.com/Timonso-1/TwitchChatMonitor/actions/workflows/deploy.yml/badge.svg)](https://github.com/Timonso-1/TwitchChatMonitor/actions/workflows/deploy.yml)
 
 ![Deploy](https://github.com/Timonso-1/TwitchChatMonitor/actions/workflows/deploy.yml/badge.svg)
 
